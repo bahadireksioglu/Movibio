@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Movibio.DataLayer.Concrete;
 using Movibio.DataLayer.Dtos.CastDtos;
+using Movibio.MVC.Extensions;
 using Movibio.ServiceLayer.Abstract;
 using Movibio.SharedLayer.Utilities.Extensions;
 using Movibio.SharedLayer.Utilities.Results.ComplexTypes;
@@ -19,13 +20,10 @@ namespace Movibio.MVC.Areas.Admin.Controllers
     {
         private readonly ICastService _castService;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _env;
         public CastController(ICastService castService, 
-            IWebHostEnvironment env,
             IMapper mapper)
         {
             _castService = castService;
-            _env = env;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
@@ -48,9 +46,9 @@ namespace Movibio.MVC.Areas.Admin.Controllers
 
             castInsertDto.CreatedByUserName = "admin";
             castInsertDto.ModifiedByUserName = "admin";
-            castInsertDto.PicturePath = await ImageUpload(
+            castInsertDto.PicturePath = await ImageExtensions.ImageUpload(
                 castInsertDto.FirstName + castInsertDto.LastName,
-                castInsertDto.Picture);
+                "casts", castInsertDto.Picture);
 
             var insertedCast = await _castService.Insert(castInsertDto);
             if (insertedCast.ResultStatus == ResultStatus.Success)
@@ -77,9 +75,9 @@ namespace Movibio.MVC.Areas.Admin.Controllers
 
             if (castUpdateDto.Picture != null)
             {
-                castUpdateDto.PicturePath = await ImageUpload(
+                castUpdateDto.PicturePath = await ImageExtensions.ImageUpload(
                     castUpdateDto.FirstName + castUpdateDto.LastName,
-                    castUpdateDto.Picture);
+                    "casts", castUpdateDto.Picture);
                 isNewPicUploaded = true;
             }
             castUpdateDto.ModifiedByUserName = "admin";
@@ -89,7 +87,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             if (updatedCast.ResultStatus == ResultStatus.Success)
             {
                 if (isNewPicUploaded)
-                    ImageDelete(oldUserPic);
+                    ImageExtensions.ImageDelete(oldUserPic, "casts");
                 return Json(0);
             }
 
@@ -102,41 +100,41 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             var deletedCast = await _castService.Delete(castId);
             if (deletedCast != null)
             {
-                ImageDelete(deletedCast.Data.PicturePath);
+                ImageExtensions.ImageDelete(deletedCast.Data.PicturePath, "casts");
                 return Json(0);
             }
             return Json(1);
         }
 
-        public async Task<string> ImageUpload(string castName, IFormFile picFile)
-        {
-            //  ~/img/user.Picture
-            string wwwroot = _env.WebRootPath;
-            //string fileName = Path.GetFileNameWithoutExtension(picFile.FileName);
-            string fileExtension = Path.GetExtension(picFile.FileName);
-            DateTime dateTime = DateTime.Now;
-            string fileName = $"{castName}_" +
-                $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
-            var path = Path.Combine($"{wwwroot}/images/casts", fileName);
+        //public async Task<string> ImageUpload(string castName, IFormFile picFile)
+        //{
+        //    //  ~/img/user.Picture
+        //    string wwwroot = _env.WebRootPath;
+        //    //string fileName = Path.GetFileNameWithoutExtension(picFile.FileName);
+        //    string fileExtension = Path.GetExtension(picFile.FileName);
+        //    DateTime dateTime = DateTime.Now;
+        //    string fileName = $"{castName}_" +
+        //        $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
+        //    var path = Path.Combine($"{wwwroot}/images/casts", fileName);
 
-            await using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await picFile.CopyToAsync(stream);
-            }
+        //    await using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        await picFile.CopyToAsync(stream);
+        //    }
 
-            return fileName;
-        }
+        //    return fileName;
+        //}
 
-        public bool ImageDelete(string pictureName)
-        {
-            string wwwroot = _env.WebRootPath;
-            var fileToDelete = Path.Combine($"{wwwroot}/images/casts", pictureName);
-            if (System.IO.File.Exists(fileToDelete))
-            {
-                System.IO.File.Delete(fileToDelete);
-                return true;
-            }
-            return false;
-        }
+        //public bool ImageDelete(string pictureName)
+        //{
+        //    string wwwroot = _env.WebRootPath;
+        //    var fileToDelete = Path.Combine($"{wwwroot}/images/casts", pictureName);
+        //    if (System.IO.File.Exists(fileToDelete))
+        //    {
+        //        System.IO.File.Delete(fileToDelete);
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

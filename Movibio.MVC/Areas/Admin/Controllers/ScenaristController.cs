@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Movibio.DataLayer.Dtos.ScenaristDtos;
+using Movibio.MVC.Extensions;
 using Movibio.ServiceLayer.Abstract;
 using Movibio.SharedLayer.Utilities.Extensions;
 using Movibio.SharedLayer.Utilities.Results.ComplexTypes;
@@ -18,13 +19,10 @@ namespace Movibio.MVC.Areas.Admin.Controllers
     {
         private readonly IScenaristService _scenaristService;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _env;
         public ScenaristController(IScenaristService scenaristService,
-            IWebHostEnvironment env,
             IMapper mapper)
         {
             _scenaristService = scenaristService;
-            _env = env;
             _mapper = mapper;
         }
 
@@ -49,9 +47,9 @@ namespace Movibio.MVC.Areas.Admin.Controllers
 
             scenaristInsertDto.CreatedByUserName = "admin";
             scenaristInsertDto.ModifiedByUserName = "admin";
-            scenaristInsertDto.PicturePath = await ImageUpload(
+            scenaristInsertDto.PicturePath = await ImageExtensions.ImageUpload(
                 scenaristInsertDto.FirstName + scenaristInsertDto.LastName,
-                scenaristInsertDto.Picture);
+                "scenarists", scenaristInsertDto.Picture);
 
             var insertedScenarist = await _scenaristService.Insert(scenaristInsertDto);
             if (insertedScenarist.ResultStatus == ResultStatus.Success)
@@ -78,9 +76,9 @@ namespace Movibio.MVC.Areas.Admin.Controllers
 
             if (scenaristUpdateDto.Picture != null)
             {
-                scenaristUpdateDto.PicturePath = await ImageUpload(
+                scenaristUpdateDto.PicturePath = await ImageExtensions.ImageUpload(
                     scenaristUpdateDto.FirstName + scenaristUpdateDto.LastName,
-                    scenaristUpdateDto.Picture);
+                    "scenarists", scenaristUpdateDto.Picture);
                 isNewPicUploaded = true;
             }
             scenaristUpdateDto.ModifiedByUserName = "admin";
@@ -90,7 +88,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             if (updatedScenarist.ResultStatus == ResultStatus.Success)
             {
                 if (isNewPicUploaded)
-                    ImageDelete(oldUserPic);
+                    ImageExtensions.ImageDelete(oldUserPic, "scenarists");
                 return Json(0);
             }
 
@@ -103,40 +101,40 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             var deletedScenarist= await _scenaristService.Delete(scenaristId);
             if (deletedScenarist != null)
             {
-                ImageDelete(deletedScenarist.Data.PicturePath);
+                ImageExtensions.ImageDelete(deletedScenarist.Data.PicturePath, "scenarists");
                 return Json(0);
             }
             return Json(1);
         }
-        public async Task<string> ImageUpload(string castName, IFormFile picFile)
-        {
-            //  ~/img/user.Picture
-            string wwwroot = _env.WebRootPath;
-            //string fileName = Path.GetFileNameWithoutExtension(picFile.FileName);
-            string fileExtension = Path.GetExtension(picFile.FileName);
-            DateTime dateTime = DateTime.Now;
-            string fileName = $"{castName}_" +
-                $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
-            var path = Path.Combine($"{wwwroot}/images/scenarists", fileName);
+        //public async Task<string> ImageUpload(string castName, IFormFile picFile)
+        //{
+        //    //  ~/img/user.Picture
+        //    string wwwroot = _env.WebRootPath;
+        //    //string fileName = Path.GetFileNameWithoutExtension(picFile.FileName);
+        //    string fileExtension = Path.GetExtension(picFile.FileName);
+        //    DateTime dateTime = DateTime.Now;
+        //    string fileName = $"{castName}_" +
+        //        $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
+        //    var path = Path.Combine($"{wwwroot}/images/scenarists", fileName);
 
-            await using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await picFile.CopyToAsync(stream);
-            }
+        //    await using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        await picFile.CopyToAsync(stream);
+        //    }
 
-            return fileName;
-        }
+        //    return fileName;
+        //}
 
-        public bool ImageDelete(string pictureName)
-        {
-            string wwwroot = _env.WebRootPath;
-            var fileToDelete = Path.Combine($"{wwwroot}/images/scenarists", pictureName);
-            if (System.IO.File.Exists(fileToDelete))
-            {
-                System.IO.File.Delete(fileToDelete);
-                return true;
-            }
-            return false;
-        }
+        //public bool ImageDelete(string pictureName)
+        //{
+        //    string wwwroot = _env.WebRootPath;
+        //    var fileToDelete = Path.Combine($"{wwwroot}/images/scenarists", pictureName);
+        //    if (System.IO.File.Exists(fileToDelete))
+        //    {
+        //        System.IO.File.Delete(fileToDelete);
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

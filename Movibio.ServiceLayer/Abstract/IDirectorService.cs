@@ -1,4 +1,5 @@
 ﻿using Movibio.DataLayer.Concrete;
+using Movibio.DataLayer.Dtos.DirectorDtos;
 using Movibio.SharedLayer.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace Movibio.ServiceLayer.Abstract
     {
         Task<IDataResult<Director>> Get(int directorId);
         Task<IDataResult<IList<Director>>> GetAll();
-        Task<IDataResult<Director>> Insert(Director director);
-        Task<IDataResult<Director>> Update(Director director);
-        Task<IDataResult<Director>> Delete(Director director);
+        Task<IDataResult<Director>> Insert(DirectorInsertDto directorInsertDto);
+        Task<IDataResult<Director>> Update(DirectorUpdateDto directorUpdateDto);
+        Task<IDataResult<Director>> Delete(int directorId);
     }
 }

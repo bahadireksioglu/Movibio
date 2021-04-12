@@ -52,7 +52,7 @@ namespace Movibio.ServiceLayer.Concrete
             var insertedScenarist = await _unitOfWork.Scenarists.InsertAsync(scenarist);
             await _unitOfWork.SaveAsync();
 
-            if (scenarist != null)
+            if (insertedScenarist != null)
                 return new DataResult<Scenarist>(ResultStatus.Success, insertedScenarist);
 
             return new DataResult<Scenarist>(ResultStatus.Error, null);
