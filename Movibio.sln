@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movibio.DataLayer", "Movibio.DataLayer\Movibio.DataLayer.csproj", "{487A25F8-B64A-4E20-BA53-39699175D181}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C} = {FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movibio.BusinessLayer", "Movibio.BusinessLayer\Movibio.BusinessLayer.csproj", "{E72D3647-81D9-422E-9368-1F8BF9A15283}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C} = {FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}
+		{487A25F8-B64A-4E20-BA53-39699175D181} = {487A25F8-B64A-4E20-BA53-39699175D181}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movibio.ServiceLayer", "Movibio.ServiceLayer\Movibio.ServiceLayer.csproj", "{FE9EFD45-F141-4B82-9504-0A331EDA6362}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E72D3647-81D9-422E-9368-1F8BF9A15283} = {E72D3647-81D9-422E-9368-1F8BF9A15283}
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C} = {FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movibio.SharedLayer", "Movibio.SharedLayer\Movibio.SharedLayer.csproj", "{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movibio.MVC", "Movibio.MVC\Movibio.MVC.csproj", "{4389805A-BA32-48A9-A548-133E735B308D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{487A25F8-B64A-4E20-BA53-39699175D181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487A25F8-B64A-4E20-BA53-39699175D181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487A25F8-B64A-4E20-BA53-39699175D181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487A25F8-B64A-4E20-BA53-39699175D181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E72D3647-81D9-422E-9368-1F8BF9A15283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E72D3647-81D9-422E-9368-1F8BF9A15283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E72D3647-81D9-422E-9368-1F8BF9A15283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E72D3647-81D9-422E-9368-1F8BF9A15283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9EFD45-F141-4B82-9504-0A331EDA6362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9EFD45-F141-4B82-9504-0A331EDA6362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9EFD45-F141-4B82-9504-0A331EDA6362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9EFD45-F141-4B82-9504-0A331EDA6362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8BF7AF-3ED2-4F30-A2FA-BAF55E5AFB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4389805A-BA32-48A9-A548-133E735B308D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4389805A-BA32-48A9-A548-133E735B308D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4389805A-BA32-48A9-A548-133E735B308D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4389805A-BA32-48A9-A548-133E735B308D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A01D7C3-6216-4770-A16C-63F257CD5127}
+	EndGlobalSection
+EndGlobal

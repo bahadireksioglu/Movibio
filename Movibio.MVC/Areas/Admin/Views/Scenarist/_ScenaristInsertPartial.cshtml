@@ -1,0 +1,57 @@
+﻿@model Movibio.DataLayer.Dtos.ScenaristDtos.ScenaristInsertDto
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span class="fas fa-plus"></span> Senarist Ekle</h5>                
+            </div>
+            <div class="modal-body">
+                <form asp-action="Insert" id="form-scenarist-insert">
+                    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div asp-validation-summary="All" class="text-danger" id="validation-summary" aria-hidden="true" style="display:none;"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName"></label>
+                        <input class="form-control" asp-for="FirstName" placeholder="İsim" maxlength="100"/>
+                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName"></label>
+                        <input class="form-control" asp-for="LastName" placeholder="Soyisim" maxlength="150"/>
+                        <span class="text-danger" asp-validation-for="LastName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthCountry"></label>
+                        <input class="form-control" asp-for="BirthCountry" placeholder="Doğduğu Ülke" maxlength="100"/>
+                        <span class="text-danger" asp-validation-for="BirthCountry"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthCity"></label>
+                        <input class="form-control" asp-for="BirthCity" placeholder="Doğduğu Şehir" maxlength="100"/>
+                        <span class="text-danger" asp-validation-for="BirthCity"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate"></label>
+                        <input type="datetime-local" class="form-control" asp-for="BirthDate" placeholder="Doğum Tarihi" />
+                        <span class="text-danger" asp-validation-for="BirthDate"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Biography"></label>
+                        <textarea class="form-control" asp-for="Biography" placeholder="Kısa Biyografi" maxlength="300"></textarea>
+                        <span class="text-danger" asp-validation-for="Biography"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture"></label>
+                        <input type="file" accept="image/*" class="form-control-file" asp-for="Picture" placeholder="Resim" maxlength="500"/>
+                        <span class="text-danger" asp-validation-for="Picture"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-block" id="btn-cancel" data-dismiss="modal"><span class="fas fa-times"></span> İptal</button>
+                <button type="button" class="btn btn-success btn-block" id="btn-scenarist-insert"><span class="fas fa-save"></span> Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.Title - Admin Paneli | Ashina Blog</title>
+    @await Html.PartialAsync("_LayoutCssPartial")
+</head>
+<body class="sb-nav-fixed">
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <h2>Hoşgeldin User</h2>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class='sidebar-link'>
+                                @*<i class="bi bi-grid-fill"></i>*@
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                @*<i class="bi bi-stack"></i>*@
+                                <span>Sayfa Ayarları</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Movie" asp-action="Index">Film Ayarları</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Scenarist" asp-action="Index">Senarist Ayarları</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Director" asp-action="Index">Yönetmen Ayarları</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Cast" asp-action="Index">Oyuncu Ayarları</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Producer" asp-action="Index">Yapımcı Ayarları</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+
+            @RenderBody()
+
+        </div>
+    </div>
+    @await Html.PartialAsync("_LayoutJsPartial")
+    @await RenderSectionAsync("Scripts", false)
+</body>
+</html>
