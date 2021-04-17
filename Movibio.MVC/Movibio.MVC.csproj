@@ -13,6 +13,7 @@
     <Folder Include="wwwroot\assets\js\" />
     <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\images\casts\" />
+    <Folder Include="wwwroot\images\directors\" />
     <Folder Include="wwwroot\images\scenarists\" />
   </ItemGroup>
 

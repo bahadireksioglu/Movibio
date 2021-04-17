@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Movibio.BusinessLayer.Concrete.EntityFramework.Mapping;
-using Movibio.BusinessLayer.Concrete.EntityFramework.Mapping;
 using Movibio.DataLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -23,14 +22,10 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Context
         public DbSet<Scenarist> Scenarists { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
         public DbSet<Picture> Pictures { get; set; }
-        public DbSet<Producer> Producers { get; set; }
-        public DbSet<ProducerCorporate> ProducerCorporate { get; set; }
-        public DbSet<ProducerIndividual> ProducerIndividual { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
         public DbSet<MovieDirector> MovieDirectors { get; set; }
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<MovieLanguage> MovieLanguages { get; set; }
-        public DbSet<MovieProducer> MovieProducers { get; set; }
         public DbSet<MovieScenarist> MovieScenarists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,15 +58,13 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Context
             modelBuilder.ApplyConfiguration(new LanguageMap());
             modelBuilder.ApplyConfiguration(new TrailerMap());
             modelBuilder.ApplyConfiguration(new PictureMap());
-            modelBuilder.ApplyConfiguration(new ProducerMap());
-            modelBuilder.ApplyConfiguration(new ProducerCorporateMap());
-            modelBuilder.ApplyConfiguration(new ProducerIndividualMap());
+
             modelBuilder.ApplyConfiguration(new MovieScenaristMap());
             modelBuilder.ApplyConfiguration(new MovieCastMap());
             modelBuilder.ApplyConfiguration(new MovieDirectorMap());
             modelBuilder.ApplyConfiguration(new MovieGenreMap());
             modelBuilder.ApplyConfiguration(new MovieLanguageMap());
-            modelBuilder.ApplyConfiguration(new MovieProducerMap());
+
         }
     }   
 }

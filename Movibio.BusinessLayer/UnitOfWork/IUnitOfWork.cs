@@ -15,7 +15,6 @@ namespace Movibio.BusinessLayer.UnitOfWork
         IDirectorRepository Directors { get; }
         IGenreRepository Genres { get; }
         ILanguageRepository Languages { get; }
-        IProducerRepository Producers { get; }
         IScenaristRepository Scenarists { get; }
         ICommentRepository Comments { get; }
         ITrailerRepository Trailers { get; }
@@ -24,10 +23,7 @@ namespace Movibio.BusinessLayer.UnitOfWork
         IMovieDirectorRepository MovieDirectors { get; }
         IMovieGenreRepository MovieGenres { get; }
         IMovieLanguageRepository MovieLanguages { get; }
-        IMovieProducerRepository MovieProducers { get; }
         IMovieScenaristRepository MovieScenarists { get; }
-        IProducerCorporateRepository ProducerCorporates { get; }
-        IProducerIndividualRepository ProducerIndividuals { get; }
         Task<int> SaveAsync();
     }
 }

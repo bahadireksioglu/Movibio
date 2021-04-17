@@ -42,6 +42,7 @@ namespace Movibio.ServiceLayer.Extensions
             serviceCollection.AddScoped<IMovieService, MovieService>();
             serviceCollection.AddScoped<ICastService, CastService>();
             serviceCollection.AddScoped<IScenaristService, ScenaristService>();
+            serviceCollection.AddScoped<IDirectorService, DirectorService>();
             return serviceCollection;
         }
     }

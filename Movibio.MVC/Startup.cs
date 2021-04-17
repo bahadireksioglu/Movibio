@@ -36,7 +36,8 @@ namespace Movibio.MVC
 
             services.AddAutoMapper(
                 typeof(CastProfile),
-                typeof(ScenaristProfile));
+                typeof(ScenaristProfile),
+                typeof(DirectorProfile));
 
             services.AddSession();
             services.LoadMyServices();

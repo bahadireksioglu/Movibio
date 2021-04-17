@@ -18,18 +18,14 @@ namespace Movibio.BusinessLayer.UnitOfWork
         private readonly DirectorRepository _directorRepository;
         private readonly GenreRepository _genreRepository;
         private readonly LanguageRepository _languageRepository;
-        private readonly ProducerRepository _producerRepository;
         private readonly ScenaristRepository _scenaristRepository;
         private readonly CommentRepository _commentRepository;
         private readonly TrailerRepository _trailerRepository;
         private readonly PictureRepository _pictureRepository;
-        private readonly ProducerCorporateRepository _producerCorporateRepository;
-        private readonly ProducerIndividualRepository _producerIndividualRepository;
         private readonly MovieCastRepository _movieCastRepository;
         private readonly MovieDirectorRepository _movieDirectorRepository;
         private readonly MovieGenreRepository _movieGenreRepository;
         private readonly MovieLanguageRepository _movieLanguageRepository;
-        private readonly MovieProducerRepository _movieProducerRepository;
         private readonly MovieScenaristRepository _movieScenaristRepository;
 
         public UnitOfWork(MovibioDbContext context)
@@ -52,9 +48,6 @@ namespace Movibio.BusinessLayer.UnitOfWork
         public ILanguageRepository Languages => _languageRepository
             ?? new LanguageRepository(_context);
 
-        public IProducerRepository Producers => _producerRepository
-            ?? new ProducerRepository(_context);
-
         public IScenaristRepository Scenarists => _scenaristRepository
             ?? new ScenaristRepository(_context);
 
@@ -67,12 +60,6 @@ namespace Movibio.BusinessLayer.UnitOfWork
         public IPictureRepository Pictures => _pictureRepository
             ?? new PictureRepository(_context);
 
-        public IProducerCorporateRepository ProducerCorporates => _producerCorporateRepository
-            ?? new ProducerCorporateRepository(_context);
-
-        public IProducerIndividualRepository ProducerIndividuals => _producerIndividualRepository
-            ?? new ProducerIndividualRepository(_context);
-
         public IMovieCastRepository MovieCasts => _movieCastRepository
             ?? new MovieCastRepository(_context);
 
@@ -84,9 +71,6 @@ namespace Movibio.BusinessLayer.UnitOfWork
 
         public IMovieLanguageRepository MovieLanguages => _movieLanguageRepository
             ?? new MovieLanguageRepository(_context);
-
-        public IMovieProducerRepository MovieProducers => _movieProducerRepository
-            ?? new MovieProducerRepository(_context);
 
         public IMovieScenaristRepository MovieScenarists => _movieScenaristRepository
             ?? new MovieScenaristRepository(_context);

@@ -22,7 +22,6 @@ namespace Movibio.DataLayer.Concrete
         public ICollection<MovieDirector> MovieDirectors { get; set; }
         public ICollection<MovieGenre> MovieGenres { get; set; }
         public ICollection<MovieLanguage> MovieLanguages { get; set; }
-        public ICollection<MovieProducer> MovieProducers { get; set; }
         public ICollection<MovieScenarist> MovieScenarists { get; set; }
     }
 }

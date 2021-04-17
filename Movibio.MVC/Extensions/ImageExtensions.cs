@@ -11,12 +11,15 @@ namespace Movibio.MVC.Extensions
 {
     public static class ImageExtensions
     {
-        private static readonly IWebHostEnvironment _env;
-        
-        public static async Task<string> ImageUpload(string name, string folderName, IFormFile picFile)
+
+        public static async Task<string> ImageUpload(
+            string name,
+            string folderName,
+            IFormFile picFile,
+            IWebHostEnvironment env)
         {
-            
-            string wwwroot = _env.WebRootPath;            
+
+            string wwwroot = env.WebRootPath;
             string fileExtension = Path.GetExtension(picFile.FileName);
             DateTime dateTime = DateTime.Now;
             string fileName = $"{name}_" +
@@ -31,9 +34,9 @@ namespace Movibio.MVC.Extensions
             return fileName;
         }
 
-        public static bool ImageDelete(string pictureName, string folderName)
+        public static bool ImageDelete(string pictureName, string folderName, IWebHostEnvironment env)
         {
-            string wwwroot = _env.WebRootPath;
+            string wwwroot = env.WebRootPath;
             var fileToDelete = Path.Combine($"{wwwroot}/images/{folderName}", pictureName);
             if (System.IO.File.Exists(fileToDelete))
             {

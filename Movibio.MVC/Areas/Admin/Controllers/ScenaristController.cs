@@ -19,11 +19,13 @@ namespace Movibio.MVC.Areas.Admin.Controllers
     {
         private readonly IScenaristService _scenaristService;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _env;
         public ScenaristController(IScenaristService scenaristService,
-            IMapper mapper)
+            IMapper mapper, IWebHostEnvironment env)
         {
             _scenaristService = scenaristService;
             _mapper = mapper;
+            _env = env;
         }
 
         public async Task<IActionResult> Index()
@@ -48,8 +50,8 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             scenaristInsertDto.CreatedByUserName = "admin";
             scenaristInsertDto.ModifiedByUserName = "admin";
             scenaristInsertDto.PicturePath = await ImageExtensions.ImageUpload(
-                scenaristInsertDto.FirstName + scenaristInsertDto.LastName,
-                "scenarists", scenaristInsertDto.Picture);
+                scenaristInsertDto.FirstName + scenaristInsertDto.LastName, 
+                "scenarists", scenaristInsertDto.Picture, _env);
 
             var insertedScenarist = await _scenaristService.Insert(scenaristInsertDto);
             if (insertedScenarist.ResultStatus == ResultStatus.Success)
@@ -78,7 +80,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             {
                 scenaristUpdateDto.PicturePath = await ImageExtensions.ImageUpload(
                     scenaristUpdateDto.FirstName + scenaristUpdateDto.LastName,
-                    "scenarists", scenaristUpdateDto.Picture);
+                    "scenarists", scenaristUpdateDto.Picture, _env);
                 isNewPicUploaded = true;
             }
             scenaristUpdateDto.ModifiedByUserName = "admin";
@@ -88,7 +90,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             if (updatedScenarist.ResultStatus == ResultStatus.Success)
             {
                 if (isNewPicUploaded)
-                    ImageExtensions.ImageDelete(oldUserPic, "scenarists");
+                    ImageExtensions.ImageDelete(oldUserPic, "scenarists", _env);
                 return Json(0);
             }
 
@@ -101,7 +103,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             var deletedScenarist= await _scenaristService.Delete(scenaristId);
             if (deletedScenarist != null)
             {
-                ImageExtensions.ImageDelete(deletedScenarist.Data.PicturePath, "scenarists");
+                ImageExtensions.ImageDelete(deletedScenarist.Data.PicturePath, "scenarists", _env);
                 return Json(0);
             }
             return Json(1);

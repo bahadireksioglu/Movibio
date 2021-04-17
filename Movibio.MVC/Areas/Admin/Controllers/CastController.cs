@@ -20,11 +20,13 @@ namespace Movibio.MVC.Areas.Admin.Controllers
     {
         private readonly ICastService _castService;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _env;
         public CastController(ICastService castService, 
-            IMapper mapper)
+            IMapper mapper, IWebHostEnvironment env)
         {
             _castService = castService;
             _mapper = mapper;
+            _env = env;
         }
         public async Task<IActionResult> Index()
         {
@@ -48,7 +50,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             castInsertDto.ModifiedByUserName = "admin";
             castInsertDto.PicturePath = await ImageExtensions.ImageUpload(
                 castInsertDto.FirstName + castInsertDto.LastName,
-                "casts", castInsertDto.Picture);
+                "casts", castInsertDto.Picture, _env);
 
             var insertedCast = await _castService.Insert(castInsertDto);
             if (insertedCast.ResultStatus == ResultStatus.Success)
@@ -77,7 +79,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             {
                 castUpdateDto.PicturePath = await ImageExtensions.ImageUpload(
                     castUpdateDto.FirstName + castUpdateDto.LastName,
-                    "casts", castUpdateDto.Picture);
+                    "casts", castUpdateDto.Picture, _env);
                 isNewPicUploaded = true;
             }
             castUpdateDto.ModifiedByUserName = "admin";
@@ -87,7 +89,7 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             if (updatedCast.ResultStatus == ResultStatus.Success)
             {
                 if (isNewPicUploaded)
-                    ImageExtensions.ImageDelete(oldUserPic, "casts");
+                    ImageExtensions.ImageDelete(oldUserPic, "casts", _env);
                 return Json(0);
             }
 
@@ -100,41 +102,10 @@ namespace Movibio.MVC.Areas.Admin.Controllers
             var deletedCast = await _castService.Delete(castId);
             if (deletedCast != null)
             {
-                ImageExtensions.ImageDelete(deletedCast.Data.PicturePath, "casts");
+                ImageExtensions.ImageDelete(deletedCast.Data.PicturePath, "casts", _env);
                 return Json(0);
             }
             return Json(1);
-        }
-
-        //public async Task<string> ImageUpload(string castName, IFormFile picFile)
-        //{
-        //    //  ~/img/user.Picture
-        //    string wwwroot = _env.WebRootPath;
-        //    //string fileName = Path.GetFileNameWithoutExtension(picFile.FileName);
-        //    string fileExtension = Path.GetExtension(picFile.FileName);
-        //    DateTime dateTime = DateTime.Now;
-        //    string fileName = $"{castName}_" +
-        //        $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
-        //    var path = Path.Combine($"{wwwroot}/images/casts", fileName);
-
-        //    await using (var stream = new FileStream(path, FileMode.Create))
-        //    {
-        //        await picFile.CopyToAsync(stream);
-        //    }
-
-        //    return fileName;
-        //}
-
-        //public bool ImageDelete(string pictureName)
-        //{
-        //    string wwwroot = _env.WebRootPath;
-        //    var fileToDelete = Path.Combine($"{wwwroot}/images/casts", pictureName);
-        //    if (System.IO.File.Exists(fileToDelete))
-        //    {
-        //        System.IO.File.Delete(fileToDelete);
-        //        return true;
-        //    }
-        //    return false;
-        //}
+        }        
     }
 }
