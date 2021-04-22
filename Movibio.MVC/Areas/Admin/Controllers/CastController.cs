@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Movibio.MVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CastController : Controller
     {
         private readonly ICastService _castService;

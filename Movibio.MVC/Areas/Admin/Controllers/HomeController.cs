@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Movibio.MVC.Areas.Admin.Controllers
 {
    
+    [Area("Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

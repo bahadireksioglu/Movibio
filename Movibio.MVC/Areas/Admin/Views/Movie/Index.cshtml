@@ -4,13 +4,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-
+<div id="modal-placeholder" aria-hidden="true"></div>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>FİLM AYARLARI</h3>
-                <a asp-area="Admin" asp-controller="Movie" asp-action="Insert" class="btn btn-success mb-3">Film Ekle</a>
+                <button id="btn-new-movie" class="btn btn-success mb-3">Film Ekle</button>
             </div>
 
         </div>
@@ -24,7 +24,7 @@
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
-                            <th>Film Posteri</th>
+                            <th>Film Afişi</th>
                             <th>Film Adı</th>
                             <th>İşlemler</th>
                         </tr>
@@ -60,5 +60,8 @@
     </section>
 </div>
 
+@section Scripts{ 
+<script src="~/adminpanel/js/movie.js"></script>
+}
 
 

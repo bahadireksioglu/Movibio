@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movibio.BusinessLayer.Concrete.EntityFramework.Context;
 
 namespace Movibio.BusinessLayer.Migrations
 {
     [DbContext(typeof(MovibioDbContext))]
-    partial class MovibioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210418205751_InitialCreate5")]
+    partial class InitialCreate5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

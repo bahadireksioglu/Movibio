@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Movibio.SharedLayer\Movibio.SharedLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\MovieDtos\" />
-  </ItemGroup>
-
 </Project>

@@ -36,7 +36,7 @@ namespace Movibio.ServiceLayer.Concrete
             var movies = await _unitOfWork.Movies.GetAllAsync(null);
 
             if (movies.Count > 0)
-                return new DataResult<IList<Movie>> (ResultStatus.Success);
+                return new DataResult<IList<Movie>> (ResultStatus.Success, movies);
             return new DataResult<IList<Movie>> (ResultStatus.Error);
         }
 

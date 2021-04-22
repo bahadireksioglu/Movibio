@@ -19,7 +19,7 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Mapping
             builder.Property(m => m.Name).IsRequired();
             builder.Property(m => m.PosterPath).HasMaxLength(500);
             builder.Property(m => m.PosterPath).IsRequired();
-            builder.Property(m => m.Subject).HasMaxLength(500);
+            builder.Property(m => m.Subject).HasColumnType("NVARCHAR(MAX)");
             builder.Property(m => m.Subject).IsRequired();
             builder.Property(m => m.ReleaseDate).IsRequired();
             builder.Property(m => m.CreatedByUserName).IsRequired();

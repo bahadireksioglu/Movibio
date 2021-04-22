@@ -1,0 +1,35 @@
+﻿@model Movibio.MVC.Areas.Admin.Models.UserWithRolesViewModel
+<div class="sidebar-menu">
+    <ul class="menu">
+        <li class="sidebar-title">Menu</li>
+
+        <li class="sidebar-item active ">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class='sidebar-link'>
+                @*<i class="bi bi-grid-fill"></i>*@
+                <span>Dashboard</span>
+            </a>
+        </li>
+        @*if (Model.Roles.Any(r => r.Equals("Admin"))) -> Kullanıcının rolunu kontrol ediyor buna göre menüyü listeleyeceğim *@
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    @*<i class="bi bi-stack"></i>*@
+                    <span>Sayfa Ayarları</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a asp-area="Admin" asp-controller="Movie" asp-action="Index">Film Ayarları</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a asp-area="Admin" asp-controller="Scenarist" asp-action="Index">Senarist Ayarları</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a asp-area="Admin" asp-controller="Director" asp-action="Index">Yönetmen Ayarları</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a asp-area="Admin" asp-controller="Cast" asp-action="Index">Oyuncu Ayarları</a>
+                    </li>
+                </ul>
+            </li>
+
+    </ul>
+</div>

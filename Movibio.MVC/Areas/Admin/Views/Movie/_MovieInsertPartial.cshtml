@@ -1,0 +1,92 @@
+﻿@model Movibio.DataLayer.Dtos.MovieDtos.MovieInsertDto
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span class="fas fa-plus"></span> Film Ekle</h5>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Insert" id="form-movie-insert">
+                    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div asp-validation-summary="All" class="text-danger" id="validation-summary" aria-hidden="true" style="display:none;"></div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Name">İsim</label>
+                        <input class="form-control" asp-for="Name" placeholder="İsim" maxlength="100" />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Subject">Konu</label>
+                        <textarea class="form-control" asp-for="Subject" placeholder="Kısa Biyografi" maxlength="300"></textarea>
+                        <span class="text-danger" asp-validation-for="Subject"></span>
+                    </div>
+
+                    
+                        <label asp-for="CastId">Oyuncular</label>
+                        <select asp-for="CastId" type="" class="form-control">
+                            @if (ViewBag.Casts != null)
+                            {
+                                foreach (var item in ViewBag.Casts)
+                                {
+                                    <option value="@item.Id">@(item.FirstName+" "+item.LastName)</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="text-danger" asp-validation-for="CastId"></span>
+                    
+                    
+                    <div class="form-group">
+                        <label asp-for="DirectorId">Yönetmenler</label>
+                        <select asp-for="DirectorId" class="js-example-basic-multiple">
+                            @if (ViewBag.Directors != null)
+                            {
+                                foreach (var item in ViewBag.Directors)
+                                {
+                                    <option value="@item.Id">@(item.FirstName+" "+item.LastName)</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="text-danger" asp-validation-for="DirectorId"></span>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label asp-for="Poster">Afiş</label>
+                        <input type="file" accept="image/*" class="form-control-file" asp-for="Poster" placeholder="Resim" maxlength="500" />
+                        <span class="text-danger" asp-validation-for="Poster"></span>
+                    </div>
+                    @*<div class="form-group">
+                        <label asp-for="PictureFiles">Görseller</label>
+                        <input type="file" accept="image/*" class="form-control-file" asp-for="PictureFiles" multiple placeholder="Resim" maxlength="500" />
+                        <span class="text-danger" asp-validation-for="PictureFiles"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrailerFiles">Görseller</label>
+                        <input type="file" accept="image/*" class="form-control-file" asp-for="TrailerFiles" multiple placeholder="Resim" maxlength="500" />
+                        <span class="text-danger" asp-validation-for="TrailerFiles"></span>
+                    </div>*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-block" id="btn-cancel" data-dismiss="modal"><span class="fas fa-times"></span> İptal</button>
+                <button type="button" class="btn btn-success btn-block" id="btn-movie-insert"><span class="fas fa-save"></span> Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        //$('#js-example-basic-hide-search-multi').select2();
+
+        //$('#js-example-basic-hide-search-multi').on('select2:opening select2:closing', function (event) {
+        //    var $searchfield = $(this).parent().find('.select2-search__field');
+        //    $searchfield.prop('disabled', true);
+        //});
+    </script>
+}
+

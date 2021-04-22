@@ -1,0 +1,22 @@
+﻿@model ICollection<Movibio.DataLayer.Concrete.Movie>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home" id="home">
+    <div class="max-width">
+        <div class="carousel owl-carousel">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="box">
+                        <img src="~/images/movies/@item.Name/@item.PosterPath" alt="">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
