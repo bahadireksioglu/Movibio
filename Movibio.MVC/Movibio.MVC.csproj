@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\images\casts\" />
     <Folder Include="wwwroot\images\directors\" />
     <Folder Include="wwwroot\images\scenarists\" />

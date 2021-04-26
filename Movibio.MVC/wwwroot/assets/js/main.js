@@ -25,19 +25,6 @@ $(document).ready(function(){
         $('.menu-btn #ham').toggleClass("active");
     });
 
-
-    /*var typed = new Typed(".typing-slogan", {
-        strings: ["Lorem ipsum dolor sit amet."],
-        typeSpeed: 100,       
-        loop:true
-    });
-
-    var typed2 = new Typed(".typing-worklist", {
-        strings: ["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit.", "Mauris porta eget velit vel fermentum.", "Fusce nibh nisl."],
-        typeSpeed: 100,       
-        loop:true
-    });*/
-
     $('.home .carousel').owlCarousel({
         margin:20,
         loop:false,

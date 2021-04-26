@@ -7,14 +7,18 @@
 <section class="home" id="home">
     <div class="max-width">
         <div class="carousel owl-carousel">
-            @foreach (var item in Model)
+            @if (Model != null)
             {
-                <div class="card">
-                    <div class="box">
-                        <img src="~/images/movies/@item.Name/@item.PosterPath" alt="">
+                foreach (var item in Model)
+                {
+                    <div class="card">
+                        <div class="box">
+                            <img src="~/images/movies/@item.Name/@item.PosterPath" alt="" onclick="window.location='/Movie/Index/?movieId=@item.Id'">
+                        </div>
                     </div>
-                </div>
+                }
             }
+
         </div>
     </div>
 </section>

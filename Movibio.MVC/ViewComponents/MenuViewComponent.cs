@@ -8,15 +8,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Movibio.MVC.Areas.Admin.ViewComponents
+namespace Movibio.MVC.ViewComponents
 {
-    public class ManagementPanelMenuViewComponent : ViewComponent
+    public class MenuViewComponent : ViewComponent
     {
         private readonly UserManager<User> _userManager;
-        public ManagementPanelMenuViewComponent(UserManager<User> userManager)
+        public MenuViewComponent(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
+
         public ViewViewComponentResult Invoke()
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result; //HttpContext.User KOMUTU LOGIN OLMUŞ KULLANICIYI GETİREBİLİYOR
@@ -27,7 +28,7 @@ namespace Movibio.MVC.Areas.Admin.ViewComponents
                 { User = user, Roles = roles });
 
             }
-            return View(new UserWithRolesViewModel { User = null, Roles = null });
+            return View(new UserWithRolesViewModel { User=null, Roles=null});
         }
     }
 }

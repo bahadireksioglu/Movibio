@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +38,24 @@ namespace Movibio.MVC
             services.AddAutoMapper(
                 typeof(CastProfile),
                 typeof(ScenaristProfile),
-                typeof(DirectorProfile));
+                typeof(DirectorProfile),
+                typeof(CommentProfile));
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Admin/User/Login");
+                options.LogoutPath = new PathString("/Admin/User/Logout");
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "AshinaPOS",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest //Sonradan always e dönüþ yapýlmalýdýr þuan test aþamasýnda böyle kalabilir
+                };
+                options.SlidingExpiration = true; // zaman tanýma
+                options.ExpireTimeSpan = System.TimeSpan.FromDays(1);
+                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+            });
 
             services.AddSession();
             services.LoadMyServices();
@@ -58,9 +76,8 @@ namespace Movibio.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

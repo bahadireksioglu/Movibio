@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Movibio.MVC.Areas.Admin.Models
+namespace Movibio.MVC.Models
 {
     public class UserWithRolesViewModel
     {

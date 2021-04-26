@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model Movibio.MVC.Models.UserInsertViewModel
+@{ ViewBag.Title = "Kayıt Ol";
+                Layout = null; }
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +21,7 @@
     <div class="container">
         <div class="login-content">
             <h2 class="main-title">MOVIBIO</h2>
-            <form action="index.html">
+            <form asp-area="Admin" asp-controller="User" asp-action="Insert" method="post">
                 <div class="user-icon"><i class="fas fa-user"></i></div>
 
                 <div class="input-div one">
@@ -26,8 +29,8 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
-                        <h5>Kullanıcı Adı</h5>
-                        <input type="text" class="input">
+
+                        <input type="text" class="input" asp-for="UserName" placeholder="Kullanıcı Adı">
                     </div>
                 </div>
                 <div class="input-div one">
@@ -35,8 +38,17 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="div">
-                        <h5>Email Adresi</h5>
-                        <input type="text" class="input">
+
+                        <input type="text" class="input" asp-for="Email" placeholder="Email Adresi">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="div">
+
+                        <input type="text" class="input" asp-for="PhoneNumber" placeholder="Telefon">
                     </div>
                 </div>
                 <div class="input-div pass">
@@ -44,12 +56,12 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <h5>Parola</h5>
-                        <input type="password" class="input">
+
+                        <input type="password" class="input" asp-for="Password" placeholder="Parola">
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Kayıt Ol">
-                <a href="#">Zaten bir üyeliğim var</a>
+                <a asp-area="Admin" asp-controller="User" asp-action="Login">Zaten bir üyeliğim var</a>
             </form>
         </div>
     </div>

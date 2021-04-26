@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movibio.BusinessLayer.Concrete.EntityFramework.Context;
 
 namespace Movibio.BusinessLayer.Migrations
 {
     [DbContext(typeof(MovibioDbContext))]
-    partial class MovibioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210424144814_InitialCreate8")]
+    partial class InitialCreate8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -411,23 +413,16 @@ namespace Movibio.BusinessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "dbcc2d3b-903e-4aad-8763-beaf02047319",
+                            ConcurrencyStamp = "4e830041-1fe6-4965-8adf-0baff8b2d636",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "bb22a6b1-ad8b-4ab5-bf40-6ba1db793646",
+                            ConcurrencyStamp = "38cede34-3030-478e-b7fa-19a14bfd3ba6",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ConcurrencyStamp = "8f9e4847-8445-4c86-81dc-e8d68376653e",
-                            Name = "Standart",
-                            NormalizedName = "STANDART"
                         });
                 });
 
@@ -602,16 +597,16 @@ namespace Movibio.BusinessLayer.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8b297eb-4dad-4e31-981c-32fb514a63d8",
+                            ConcurrencyStamp = "0365132e-867d-43f2-aaf5-4a19c8375e7c",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBHm2ex1QE99fYe65nj5jPoOwaDF1PNoWLBlIV6NliYb/+fz7Ox7b3ziaDJJlG2aHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOshTTy0oXPhw979bMjry0w0dKyJglYdKSXC2h1FtKthjKaTfJYpU3JimtwXjD40pg==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "5b9aca4e-25ef-47b0-86ea-643caa8cf81f",
+                            SecurityStamp = "804c1eb3-bc7f-4454-a88c-7eb57039dd63",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -619,35 +614,18 @@ namespace Movibio.BusinessLayer.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f369cfa-c4fa-45e5-9f83-d0f3f7b942d2",
+                            ConcurrencyStamp = "4fa7bee1-43a8-4d4c-bb8b-48763d32bf18",
                             Email = "editor@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITOR@GMAIL.COM",
                             NormalizedUserName = "EDITOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPcHs7AiIaRqG6xZgNa4TqdRTVa0CVsdCjLKOCTil8A4YfEeLBhY64fgVmiluhkZ2A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ01rM2jTmEsKGd9mjCPN/BR5LJkZc10WlHt6LxPAOFBvTKWfoxkA8cc0cSmwyWg0g==",
                             PhoneNumber = "+904444444444",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "231344ea-cfdc-4d68-aa16-b01caca6769d",
+                            SecurityStamp = "7b5f1c8b-5cce-4eb2-b57b-dc2e8e77d112",
                             TwoFactorEnabled = false,
                             UserName = "editor"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f3f74d4-b432-474b-9aa9-fc1643fd8688",
-                            Email = "normal@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "NORMAL@GMAIL.COM",
-                            NormalizedUserName = "NORMAL",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHuw4SZ1HGmZB7I5kJg4CGKUkxa/4aGNHJ6emXQE9nrio2kbekrl940oAGFiNWqlDQ==",
-                            PhoneNumber = "+904444444444",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "bbfe1ac1-0c82-4b55-ac18-fe092756d02a",
-                            TwoFactorEnabled = false,
-                            UserName = "normal"
                         });
                 });
 
@@ -721,11 +699,6 @@ namespace Movibio.BusinessLayer.Migrations
                         {
                             UserId = 2,
                             RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            RoleId = 3
                         });
                 });
 

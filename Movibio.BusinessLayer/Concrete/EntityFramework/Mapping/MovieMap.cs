@@ -26,7 +26,7 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Mapping
             builder.Property(m => m.CreatedDate).IsRequired();
             builder.Property(m => m.ModifiedByUserName).IsRequired();
             builder.Property(m => m.ModifiedDate).IsRequired();
-            builder.Property(m => m.AverageScore).HasColumnType("DECIMAL(3,2)");
+            builder.Property(m => m.AverageScore).HasColumnType("DECIMAL(5,2)");
             builder.Property(m => m.AverageScore).IsRequired();
             builder.Property(m => m.CommentCount).IsRequired();
 

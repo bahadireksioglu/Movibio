@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@model Movibio.DataLayer.Dtos.UserDtos.UserLoginDto
+@{ 
+    ViewBag.Title = "Giriş Yap";
+    Layout = null; 
+}
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -18,15 +23,14 @@
     <div class="container">
         <div class="login-content">
             <h2 class="main-title">MOVIBIO</h2>
-            <form action="index.html">
+            <form asp-controller="User" asp-action="Login" method="post">
                 <div class="user-icon"><i class="fas fa-user"></i></div>
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
-                        <h5>Kullanıcı Adı</h5>
-                        <input type="text" class="input">
+                        <input type="text" class="input" placeholder="Kullanıcı Adı" asp-for="UserName">
                     </div>
                 </div>
                 <div class="input-div pass">
@@ -34,12 +38,11 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <h5>Parola</h5>
-                        <input type="password" class="input">
+                        <input type="password" class="input" placeholder="Parola" asp-for="Password">
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Giriş Yap">
-                <a href="#">Parolamı unuttum</a>
+                <a asp-area="Admin" asp-controller="User" asp-action="Insert">Kayıt Ol</a>
             </form>
         </div>
     </div>

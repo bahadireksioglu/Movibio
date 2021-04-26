@@ -13,27 +13,8 @@
     <div class="scroll-up-btn">
         <i class="fas fa-angle-up"></i>
     </div>
-    <nav class="navbar">
-        <div class="max-width">
-            <div class="logo"><a href="">MOVIBIO</a></div>
-
-            <ul class="menu">
-                <li>
-                    <div class="search">
-                        <input type="text" class="search-term" placeholder="Film ara...">
-                        <button type="submit" class="search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </li>
-                <li><a href="#home" class="menu-btn">Anasayfa</a></li>
-                <li><a href="#" class="menu-btn">Filmler</a></li>
-                <li><a href="#" class="menu-btn">Oturum Aç</a></li>
-                <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Yönetim Paneli</a></li>
-            </ul>
-            <div class="menu-btn"><i id="ham" class="fas fa-bars"></i></div>
-        </div>
-    </nav>
+    @await Component.InvokeAsync("Menu")
+    
     @RenderBody()
     @await Html.PartialAsync("_LayoutJsPartial")
     @await RenderSectionAsync("Scripts", false)

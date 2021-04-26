@@ -1,0 +1,152 @@
+﻿@model Movibio.MVC.Models.MovieContentViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+
+    <section class="about" id="about" data-id="@Model.Movie.Id">
+        <div class="max-width">
+            <div class="about-content">
+                <div class="column left">
+                    <img src="~/images/movies/@Model.Movie.Name/@Model.Movie.PosterPath" alt="">
+                </div>
+                <div class="column right">
+                    <div class="text">Toplam Yorum Sayısı : @Model.Movie.CommentCount</div>
+                    <div class="text">MOVIBIO Notu : @Model.Movie.AverageScore</div>
+                    <div class="text">
+                        Özet
+                    </div>
+                    <p>@Model.Movie.Subject</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="team" id="team">
+        <div class="max-width">
+            <h2 class="title">Oyuncular</h2>
+            <div class="carousel owl-carousel">
+                @foreach (var item in Model.Movie.MovieCasts)
+                {
+
+                    <div class="card">
+                        <div class="box">
+                            <img src="~/images/casts/@item.Cast.PicturePath" alt="">
+                            <div class="text">@(item.Cast.FirstName+" "+item.Cast.LastName)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <h2 class="title">Senaristler</h2>
+            <div class="carousel owl-carousel">
+                @foreach (var item in Model.Movie.MovieScenarists)
+                {
+
+                    <div class="card">
+                        <div class="box">
+                            <img src="~/images/scenarists/@item.Scenarist.PicturePath" alt="">
+                            <div class="text">@(item.Scenarist.FirstName+" "+item.Scenarist.LastName)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <h2 class="title">Yönetmenler</h2>
+            <div class="carousel owl-carousel">
+                @foreach (var item in Model.Movie.MovieDirectors)
+                {
+
+                    <div class="card">
+                        <div class="box">
+                            <img src="~/images/directors/@item.Director.PicturePath" alt="">
+                            <div class="text">@(item.Director.FirstName+" "+item.Director.LastName)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Yorumlar</h2>
+            <div class="contact-content">
+                <div class="column left">
+                    @foreach (var item in Model.Movie.Comments)
+                    {
+
+                        <div class="comment-card">
+
+                            <div class="text">@item.CreatedByUserName</div>
+                            <div class="score">@item.Score</div>
+                            <p>@item.Content</p>
+                        </div>
+                    }
+                </div>
+                <div class="column right">
+                    <div class="text">Yorum Gönder</div>
+                    @if (Model.User != null)
+                    {
+
+                        <div class="comment-form">
+
+                            <div class="field textarea">
+                                <textarea id="comment-content" cols="30" rows="10" placeholder="Yorum(Max 300 Karakter)" required maxlength="300"></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Puan(0 ila 100 arası) : <span id="score-val">50</span></label>
+                                <input id="score-bar" type="range" min="0" max="100" required onchange="scoreBarValue()">
+                            </div>
+                            <div class="button">
+                                <button type="button" id="comment-post-btn">Gönder</button>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text">Yorum yapabilmek için üye girişi yapmanız gerekmektedir.</div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts{
+    <script>
+        function scoreBarValue() {
+            var score = $('#score-bar').val();
+            $('#score-val').text(score);
+        }
+
+        $('#comment-post-btn').click(function () {
+            const score = $('#score-bar').val();
+            const movieId = $('#about').attr('data-id');
+            const content = $('#comment-content').val();
+
+            const commentInsertDto = {
+                MovieId: movieId,
+                Score: score,
+                Content: content
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Movie/CommentInsert',
+                data: { commentInsertDto: commentInsertDto },
+                success: function (data) {
+                    if (data == "Success") {
+                        window.location = '/Movie/Index/?movieId=' + movieId;
+                    }
+                }
+            });
+        });
+    </script>
+}
+

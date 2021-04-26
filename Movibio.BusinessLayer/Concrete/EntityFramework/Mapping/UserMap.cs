@@ -78,7 +78,22 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Mapping
             };
             editorUser.PasswordHash = CreatePasswordHash(editorUser, "editor");
 
-            builder.HasData(adminUser, editorUser);
+            var normalUser = new User()
+            {
+                Id = 3,
+                UserName = "normal",
+                NormalizedUserName = "NORMAL",
+                Email = "normal@gmail.com",
+                NormalizedEmail = "NORMAL@GMAIL.COM",
+                PhoneNumber = "+904444444444",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+
+            };
+            normalUser.PasswordHash = CreatePasswordHash(normalUser, "normal");
+
+            builder.HasData(adminUser, editorUser, normalUser);
         }
 
         private string CreatePasswordHash(User user, string password)

@@ -38,7 +38,7 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Mapping
             builder.HasMany<RoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
 
             builder.HasData(
-                
+
                 new Role
                 {
                     Id = 1,
@@ -52,7 +52,15 @@ namespace Movibio.BusinessLayer.Concrete.EntityFramework.Mapping
                     Name = "Editor",
                     NormalizedName = "EDITOR",
                     ConcurrencyStamp = Guid.NewGuid().ToString()
-                });
+                },
+                new Role
+                {
+                    Id = 3,
+                    Name = "Standart",
+                    NormalizedName = "STANDART",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                }
+            );
         }
     }
 }

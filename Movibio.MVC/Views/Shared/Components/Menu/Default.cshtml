@@ -1,0 +1,45 @@
+﻿@model Movibio.MVC.Models.UserWithRolesViewModel
+
+<nav class="navbar">
+    <div class="max-width">
+        <div class="logo"><a asp-area="" asp-controller="Home" asp-action="Index">MOVIBIO</a></div>
+        <ul class="menu">
+            <li>
+                <form id="searchform">
+                    <div class="search">
+                        <input type="text" id="search-bar" autocomplete="off" />
+                        <button type="submit" class="search-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <ul class="output" style="display:none;">
+                    </ul>
+                </form>
+            </li>
+
+            <li><a href="#home" class="menu-btn">Anasayfa</a></li>
+            <li><a href="#" class="menu-btn">Filmler</a></li>
+            @if (Model.User == null)
+            {
+                <li><a asp-area="Admin" asp-controller="User" asp-action="Login" class="menu-btn">Oturum Aç</a></li>
+            }
+            else
+            {
+                <li>
+                    <a href="#" class="menu-btn">Profilim</a>
+                </li>
+                @if (Model.Roles.Any(r => r.Equals("Admin") || r.Equals("Editor")))
+                {
+
+                    <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Yönetim Paneli</a></li>
+                }
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="Logout" class="menu-btn">Çıkış Yap</a>
+                </li>
+            }
+
+        </ul>
+        <div class="menu-btn"><i id="ham" class="fas fa-bars"></i></div>
+    </div>
+</nav>
+

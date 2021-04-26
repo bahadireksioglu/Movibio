@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Movibio.DataLayer.Dtos.MovieDtos;
 using Movibio.ServiceLayer.Abstract;
 using Movibio.SharedLayer.Utilities.Results.ComplexTypes;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace Movibio.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Editor")]
     public class MovieController : Controller
     {
 

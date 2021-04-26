@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Movibio.DataLayer.Dtos.DirectorDtos;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace Movibio.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Editor")]
     public class DirectorController : Controller
     {
         private readonly IDirectorService _directorService;
