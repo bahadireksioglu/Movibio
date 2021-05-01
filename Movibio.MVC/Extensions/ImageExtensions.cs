@@ -22,6 +22,10 @@ namespace Movibio.MVC.Extensions
             string wwwroot = env.WebRootPath;
             string fileExtension = Path.GetExtension(picFile.FileName);
             DateTime dateTime = DateTime.Now;
+            
+            if (!Directory.Exists($"{wwwroot}/images/{folderName}"))           
+                Directory.CreateDirectory($"{wwwroot}/images/{folderName}");
+            
             string fileName = $"{name}_" +
                 $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
             var path = Path.Combine($"{wwwroot}/images/{folderName}", fileName);

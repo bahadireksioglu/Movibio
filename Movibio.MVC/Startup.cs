@@ -39,7 +39,8 @@ namespace Movibio.MVC
                 typeof(CastProfile),
                 typeof(ScenaristProfile),
                 typeof(DirectorProfile),
-                typeof(CommentProfile));
+                typeof(CommentProfile),
+                typeof(MovieProfile));
 
             services.ConfigureApplicationCookie(options =>
             {

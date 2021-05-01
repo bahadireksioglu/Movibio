@@ -1,5 +1,7 @@
-﻿using Movibio.BusinessLayer.UnitOfWork;
+﻿using AutoMapper;
+using Movibio.BusinessLayer.UnitOfWork;
 using Movibio.DataLayer.Concrete;
+using Movibio.DataLayer.Dtos.MovieDtos;
 using Movibio.ServiceLayer.Abstract;
 using Movibio.SharedLayer.Utilities.Results.Abstract;
 using Movibio.SharedLayer.Utilities.Results.ComplexTypes;
@@ -15,9 +17,11 @@ namespace Movibio.ServiceLayer.Concrete
     public class MovieService : IMovieService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public MovieService(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public MovieService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<IDataResult<Movie>> Get(int movieId)
@@ -68,12 +72,38 @@ namespace Movibio.ServiceLayer.Concrete
             return new DataResult<IList<Movie>>(ResultStatus.Error);
         }
 
-        public async Task<IDataResult<Movie>> Insert(Movie movie)
+        public async Task<IDataResult<Movie>> Insert(MovieInsertDto movieInsertDto)
         {
-
-            await _unitOfWork.Movies.InsertAsync(movie);
+            var movie = _mapper.Map<Movie>(movieInsertDto);
+            movie.CreatedDate = movie.ModifiedDate;
+            var insertedMovie = await _unitOfWork.Movies.InsertAsync(movie);
             await _unitOfWork.SaveAsync();
-            return new DataResult<Movie>(ResultStatus.Success, movie);
+            if (insertedMovie != null)
+            {
+                foreach (var item in movieInsertDto.Casts)
+                    await _unitOfWork.MovieCasts.InsertAsync(
+                        new MovieCast { CastId = item, MovieId = insertedMovie.Id });
+
+                foreach (var item in movieInsertDto.Directors)
+                    await _unitOfWork.MovieDirectors.InsertAsync(
+                        new MovieDirector { DirectorId = item, MovieId = insertedMovie.Id });
+
+                foreach (var item in movieInsertDto.Scenarists)
+                    await _unitOfWork.MovieScenarists.InsertAsync(
+                        new MovieScenarist { ScenaristId = item, MovieId = insertedMovie.Id });
+
+                foreach (var item in movieInsertDto.Genres)
+                    await _unitOfWork.MovieGenres.InsertAsync(
+                        new MovieGenre { GenreId = item, MovieId = insertedMovie.Id });
+
+                foreach (var item in movieInsertDto.Languages)
+                    await _unitOfWork.MovieLanguages.InsertAsync(
+                        new MovieLanguage { LanguageId = item, MovieId = insertedMovie.Id, IsOriginal=false});
+                await _unitOfWork.SaveAsync();
+                return new DataResult<Movie>(ResultStatus.Success, insertedMovie);
+            }
+
+            return new DataResult<Movie>(ResultStatus.Error, null);
         }
 
         public async Task<IDataResult<Movie>> Update(Movie movie)

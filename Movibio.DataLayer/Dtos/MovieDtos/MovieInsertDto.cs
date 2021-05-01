@@ -12,15 +12,17 @@ namespace Movibio.DataLayer.Dtos.MovieDtos
     {
         public string Name { get; set; }
         public IFormFile Poster { get; set; }
+        public string PosterPath { get; set; }
         public string Subject { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string CreatedByUserName { get; set; }
         public string ModifiedByUserName { get; set; }
-        public ICollection<IFormFile> PictureFiles { get; set; }
-        public ICollection<IFormFile> TrailerFiles { get; set; }
-        public ICollection<int> CastId { get; set; }
-        public ICollection<int> DirectorId { get; set; }
-        public ICollection<int> GenreId { get; set; }
-        public ICollection<int> LanguageId { get; set; }
-        public ICollection<int> ScenaristId { get; set; }
+        //public ICollection<IFormFile> PictureFiles { get; set; }
+        //public ICollection<IFormFile> TrailerFiles { get; set; }
+        public ICollection<int> Casts { get; set; }
+        public ICollection<int> Directors { get; set; }
+        public ICollection<int> Genres { get; set; }
+        public ICollection<int> Languages { get; set; }
+        public ICollection<int> Scenarists { get; set; }
     }
 }

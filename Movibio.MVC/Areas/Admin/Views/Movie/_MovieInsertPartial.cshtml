@@ -24,21 +24,20 @@
                     </div>
 
                     
-                        <label asp-for="CastId">Oyuncular</label>
-                        <select asp-for="CastId" type="" class="form-control">
-                            @if (ViewBag.Casts != null)
-                            {
-                                foreach (var item in ViewBag.Casts)
-                                {
-                                    <option value="@item.Id">@(item.FirstName+" "+item.LastName)</option>
-                                }
-                            }
-
-                        </select>
-                        <span class="text-danger" asp-validation-for="CastId"></span>
-                    
-                    
                     <div class="form-group">
+                        <select class="choices form-select" multiple="multiple">
+                            <option value="square">Square</option>
+                            <option value="rectangle" selected>Rectangle</option>
+                            <option value="rombo">Rombo</option>
+                            <option value="romboid">Romboid</option>
+                            <option value="trapeze">Trapeze</option>
+                            <option value="traible" selected>Triangle</option>
+                            <option value="polygon">Polygon</option>
+                        </select>
+                    </div>
+                    
+                    
+                    @*<div class="form-group">
                         <label asp-for="DirectorId">Yönetmenler</label>
                         <select asp-for="DirectorId" class="js-example-basic-multiple">
                             @if (ViewBag.Directors != null)
@@ -51,7 +50,7 @@
 
                         </select>
                         <span class="text-danger" asp-validation-for="DirectorId"></span>
-                    </div>
+                    </div>*@
                     
 
                     <div class="form-group">
@@ -78,15 +77,4 @@
         </div>
     </div>
 </div>
-
-@section Scripts{ 
-    <script>
-        //$('#js-example-basic-hide-search-multi').select2();
-
-        //$('#js-example-basic-hide-search-multi').on('select2:opening select2:closing', function (event) {
-        //    var $searchfield = $(this).parent().find('.select2-search__field');
-        //    $searchfield.prop('disabled', true);
-        //});
-    </script>
-}
 

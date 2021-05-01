@@ -1,0 +1,151 @@
+﻿@model Movibio.DataLayer.Dtos.MovieDtos.MovieInsertDto
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section id="basic-horizontal-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">FİLM EKLE</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form form-horizontal" id="movie-insert-form" asp-action="Insert" enctype="multipart/form-data">
+                            <div class="form-body">
+                                <div class="row">
+
+                                    <div class="col-md-8 form-group">
+                                        <input type="text" id="film-name" asp-for="Name" class="form-control"
+                                               name="fname" placeholder="Film Adı">
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Yayım Tarihi</label>
+                                        </div>
+                                        <input type="datetime-local" asp-for="ReleaseDate" class="form-control" id="film-release-date" />
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <textarea class="form-control" asp-for="Subject" id="film-subject" placeholder="Kısa Özet"></textarea>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Oyuncular</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="select-casts" asp-for="Casts" class="choices form-select multiple-remove" multiple="multiple">
+                                                @foreach (var item in ViewBag.Casts)
+                                                {
+
+                                                    <option value="@item.Id">@(item.FirstName + " " + item.LastName)</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Senaristler</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="select-scenarists" asp-for="Scenarists" class="choices form-select multiple-remove" multiple="multiple">
+                                                @foreach (var item in ViewBag.Scenarists)
+                                                {
+
+                                                    <option value="@item.Id">@(item.FirstName + " " + item.LastName)</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Yönetmenler</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="select-directors" asp-for="Directors" class="choices form-select multiple-remove" multiple="multiple">
+                                                @foreach (var item in ViewBag.Directors)
+                                                {
+
+                                                    <option value="@item.Id">@(item.FirstName + " " + item.LastName)</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Dil</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="select-language" class="choices form-select multiple-remove" multiple="multiple">
+                                                @foreach (var item in ViewBag.Languages)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-4">
+                                            <label>Film Türü</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="select-genres" class="choices form-select multiple-remove" multiple="multiple">
+                                                @foreach (var item in ViewBag.Genres)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-8 form-group">
+                                        <div class="form-group">
+                                            <label for="formFile" class="form-label">
+                                                Poster Seç
+                                            </label>
+                                            <input class="form-control" asp-for="Poster" type="file" id="formFile">
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-md-8 form-group">
+                                        <div class="form-group">
+                                            <label for="formFileMultiple" class="form-label">
+                                                Resim Dosyaları Seç
+                                            </label>
+                                            <input class="form-control" type="file" id="formFileMultiple" multiple="">
+                                        </div>
+                                    </div>*@
+                                    
+                                    <div class="col-md-8 form-group">
+                                        <button type="button"
+                                                class="btn btn-primary me-1 mb-1" id="movie-insert-btn">
+                                            Gönder
+                                        </button>
+                                        <button type="reset"
+                                                class="btn btn-light-secondary me-1 mb-1">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{ 
+    <script src="~/adminpanel/js/movie.js"></script>
+}
+
